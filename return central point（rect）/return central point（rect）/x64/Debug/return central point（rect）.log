@@ -1,0 +1,11 @@
+﻿  rect.cpp
+f:\code\opencv in c++\return central point（rect）\return central point（rect）\rect.cpp(31): warning C4244: “参数”: 从“_Tp”转换到“_Tp”，可能丢失数据
+          with
+          [
+              _Tp=float
+          ]
+          and
+          [
+              _Tp=int
+          ]
+  return central point（rect）.vcxproj -> F:\code\opencv in c++\return central point（rect）\x64\Debug\return central point（rect）.exe
