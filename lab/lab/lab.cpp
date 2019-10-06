@@ -3,46 +3,37 @@
 using namespace cv;
 using namespace std;
 
+//此代码中所有HSV为YUV
 int main()
 {
-	namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
-
-	int iLowH = 100;
-	int iHighH = 140;
-
-	int iLowS = 90;
+	namedWindow("Control", CV_WINDOW_AUTOSIZE);
+	int iLowH = 0;
+	int iHighH = 255;
+	int iLowS = 0;
 	int iHighS = 255;
-
-	int iLowV = 90;
+	int iLowV = 0;
 	int iHighV = 255;
-
-	//Create trackbars in "Control" window
-	cvCreateTrackbar("LowH", "Control", &iLowH, 180); //Hue (0 - 179)
-	cvCreateTrackbar("HighH", "Control", &iHighH, 180);
-
-	cvCreateTrackbar("LowS", "Control", &iLowS, 255); //Saturation (0 - 255)
+	
+	cvCreateTrackbar("LowH", "Control", &iLowH, 255); //亮度0-255
+	cvCreateTrackbar("HighH", "Control", &iHighH, 255);
+	cvCreateTrackbar("LowS", "Control", &iLowS, 255); 
 	cvCreateTrackbar("HighS", "Control", &iHighS, 255);
-
-	cvCreateTrackbar("LowV", "Control", &iLowV, 255); //Value (0 - 255)
+	cvCreateTrackbar("LowV", "Control", &iLowV, 255); 
 	cvCreateTrackbar("HighV", "Control", &iHighV, 255);
 
 	while (true)
 	{
 		Mat imgOriginal;
-
 		imgOriginal = imread("1.jpg");				//选择源图像
-
-					
 
 		Mat imgHSV;
 		vector<Mat> hsvSplit;
-		cvtColor(imgOriginal, imgHSV, COLOR_BGR2YUV); //Convert the captured frame from BGR to HSV
-													  //因为我们读取的是彩色图，直方图均衡化需要在HSV空间做
+		cvtColor(imgOriginal, imgHSV, COLOR_BGR2YUV);//因为我们读取的是彩色图，直方图均衡化需要灰度中
 		split(imgHSV, hsvSplit);
 		equalizeHist(hsvSplit[0], hsvSplit[0]);
 		merge(hsvSplit, imgHSV);
+		
 		Mat imgThresholded;
-
 		inRange(imgHSV, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), imgThresholded); //Threshold the image
 
 		//开操作 (去除一些噪点)
@@ -55,9 +46,15 @@ int main()
 		imshow("Thresholded Image", imgThresholded); //输入图像
 		imshow("Original", imgOriginal); //输出图像
 
+				
+		//输出红色和蓝色方块图像
 		char key = (char)waitKey(300);
 		if (key == 27)
+		{
+			//imwrite("blue.jpg", imgThresholded);
 			break;
+		}
+			
 	}
 	
 }
