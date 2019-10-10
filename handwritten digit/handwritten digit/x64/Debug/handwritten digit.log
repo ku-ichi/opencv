@@ -1,0 +1,8 @@
+﻿  handwritten digit.cpp
+f:\code\opencv in c++\handwritten digit\handwritten digit\handwritten digit.cpp(91): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+f:\code\opencv in c++\handwritten digit\handwritten digit\handwritten digit.cpp(92): warning C4244: “初始化”: 从“_Tp”转换到“float”，可能丢失数据
+          with
+          [
+              _Tp=int
+          ]
+  handwritten digit.vcxproj -> F:\code\opencv in c++\handwritten digit\x64\Debug\handwritten digit.exe
